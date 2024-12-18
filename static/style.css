@@ -1,0 +1,267 @@
+/* Style global pour le corps de la page */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: rgb(247,237,235);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 50px; /* Espace entre le corps et le pied de page */
+}
+
+/* En-tête */
+header {
+    background-color: rgb(247,237,235);
+    color: black;
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* Logo */
+header img {
+    width: 80%; /* Le logo occupera 80% de la largeur de la fenêtre */
+    max-width: 1300px; /* Limite la taille maximale du logo */
+    height: auto; /* Garde les proportions du logo */
+    margin-bottom: 15px;
+    font-style: italic; /* Applique l'italique sur le logo */
+}
+
+/* Centrage et ajustabilité du logo */
+header img {
+    max-width: 100%;
+    height: auto;
+    width: auto;  /* Largeur automatique en fonction du container */
+    display: block;
+    margin: 0 auto; /* Centrage horizontal */
+}
+
+/* Titre principal */
+header h1 {
+    font-family: 'Roboto', sans-serif; /* Police moderne et élégante */
+    font-size: 48px;
+    font-weight: 700;
+    color: #a62073; /* Rose élégant */
+    margin: 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 5px; /* Espacement entre les lettres */
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+    transition: all 0.3s ease-in-out;
+}
+
+header h1:hover {
+    color: #f28794; /* Couleur au survol */
+    text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2); /* Ombre plus marquée au survol */
+}
+
+/* Slogan "Votre style, notre passion" */
+header p {
+    font-family: 'Georgia', serif; /* Police élégante pour le slogan */
+    font-size: 18px;
+    margin: 10px 0 0;
+    font-style: italic; /* Mise en italique du slogan */
+    color: #555; /* Couleur douce */
+}
+
+/* Style pour les titres des robes */
+.robe h2 {
+    font-family: 'Playfair Display', serif; /* Police élégante et classe */
+    font-size: 28px;
+    color: black; /* Rose élégant */
+    margin-bottom: 15px;
+    font-weight: 600;
+    text-transform: capitalize; /* Première lettre de chaque mot en majuscule */
+    letter-spacing: 2px; /* Espacement des lettres pour un effet plus chic */
+    transition: color 0.3s ease;
+}
+
+.robe h2:hover {
+    color: #f28794; /* Couleur au survol pour un effet interactif */
+}
+
+/* Description de la robe */
+.robe p {
+    font-family: 'Lora', serif; /* Police élégante et fluide */
+    font-size: 16px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-style: italic; /* Mise en italique pour la description */
+    letter-spacing: 1px;
+    max-height: 180px;
+    overflow: hidden; /* Cache le texte trop long */
+    transition: color 0.3s ease;
+}
+
+.robe p:hover {
+    color: #f28794; /* Couleur au survol */
+}
+
+/* Conteneur du catalogue */
+#catalogue {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+/* Style pour chaque robe */
+.robe {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    position: relative;
+}
+
+/* Effet au survol d'une robe */
+.robe:hover {
+    transform: scale(1.05);
+}
+
+/* Image de la robe */
+.robe img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Style pour la mise en page sur mobile */
+@media (max-width: 768px) {
+    #catalogue {
+        flex-direction: column;
+    }
+
+    .robe {
+        width: 100%;
+        max-width: 350px;
+        margin-bottom: 20px;
+    }
+}
+
+/* Pied de page */
+footer {
+    background-color: rgb(247,237,235);
+    color: black;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 50px;
+}
+
+footer p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Carrousel d'images */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+
+.carousel-item {
+    min-width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.carousel img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.carousel-button.left {
+    left: 0;
+}
+
+.carousel-button.right {
+    right: 0;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 8px;
+}
+
+.modal-images {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-images img {
+    width: 45%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+#robe-description {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #555;
+}
+
+.close {
+    color: #aaa;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
