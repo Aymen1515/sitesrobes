@@ -33,6 +33,7 @@ def api_robes():
     return jsonify(robes)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = os.environ.get('PORT', 5000)  # 5000 est la valeur par défaut si aucune variable d'environnement n'est définie
+    app.run(host='0.0.0.0', port=int(port), debug=True)
 
 
