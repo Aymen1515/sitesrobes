@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue de Robes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- En-tête -->
+    <header>
+        <img src="static/logo.jpg" alt="Logo" />
+        <h1>Catalogue de Robes</h1>
+        <p>Votre style, notre passion</p>
+        
+        <!-- Champ de recherche pour filtrer les robes par nom -->
+        <input type="text" id="searchBar" placeholder="Rechercher par nom de robe" oninput="filterRobes()">
+    </header>
+
+    <!-- Conteneur du catalogue -->
+    <div id="catalogue">
+        <!-- Contenu des robes sera injecté ici par le JavaScript -->
+    </div>
+
+    <!-- Modal pour afficher les images et la description -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-images">
+                <img id="main-image" src="" alt="Image principale">
+                <img id="secondary-image" src="" alt="Image secondaire">
+            </div>
+            <p id="robe-description"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Contactez-nous : <a>📞Tel : 99132848 - 21129744</a></p>
+        <p>Adresse:📍 12 rue Ahmed tlili Menzah 5 Tunis</p>
+    </footer>
+
+    <!-- Script JavaScript -->
+    <script>
+        // Variable pour stocker toutes les robes
+        let allRobes = [];
+
+        // Fonction pour charger les robes en utilisant l'API
+        async function chargerRobes() {
+            const response = await fetch('/api/robes');
+            const robes = await response.json();
+            allRobes = robes; // Stocker les robes pour pouvoir filtrer
+            afficherRobes(robes);
+        }
+
+        // Fonction pour afficher les robes
+        function afficherRobes(robes) {
+            const catalogueDiv = document.getElementById('catalogue');
+            catalogueDiv.innerHTML = '';  // Vide le catalogue avant de le remplir
+
+            robes.forEach(robe => {
+                const robeDiv = document.createElement('div');
+                robeDiv.classList.add('robe');
+                robeDiv.innerHTML = `
+                    <h2>${robe.Nom}</h2>
+                    
+                    <!-- Carrousel d'images -->
+                    <div class="carousel-container">
+                        <div class="carousel">
+                            ${robe.Images.map(image => `
+                                <div class="carousel-item">
+                                    <img src="/static/${image}" alt="${robe.Nom}" onclick="openModal('${image}', '${robe.Images[1]}', '${robe.Description}')">
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    
+                `;
+                catalogueDiv.appendChild(robeDiv);
+            });
+        }
+
+        // Fonction pour ouvrir le modal avec l'image et la description
+        function openModal(mainImage, secondaryImage, description) {
+            document.getElementById('main-image').src = '/static/' + mainImage;
+            document.getElementById('secondary-image').src = '/static/' + secondaryImage;
+            document.getElementById('robe-description').innerText = description;
+            document.getElementById('modal').style.display = "flex";
+        }
+
+        // Fonction pour fermer le modal
+        function closeModal() {
+            document.getElementById('modal').style.display = "none";
+        }
+
+        // Fonction pour filtrer les robes par nom
+        function filterRobes() {
+            const searchValue = document.getElementById('searchBar').value.toLowerCase();
+            // Filtrer les robes en fonction du nom (ignorer la casse)
+            const filteredRobes = allRobes.filter(robe => robe.Nom.toLowerCase().includes(searchValue));
+            afficherRobes(filteredRobes); // Afficher les robes filtrées
+        }
+
+        // Charger les robes lors du chargement de la page
+        window.onload = chargerRobes;
+    </script>
+</body>
+</html>
